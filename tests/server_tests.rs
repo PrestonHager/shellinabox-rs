@@ -21,3 +21,23 @@ async fn test_ws_handshake() {
         .await;
     assert!(result.is_ok());
 }
+
+#[tokio::test]
+async fn test_get_static_file() {
+    use std::fs;
+    use tempfile::tempdir;
+
+    let dir = tempdir().unwrap();
+    let pkg_dir = dir.path().join("pkg");
+    fs::create_dir(&pkg_dir).unwrap();
+    let js_path = pkg_dir.join("foo.js");
+    fs::write(&js_path, "console.log('hi');").unwrap();
+
+    let filter = routes(dir.path().to_str().unwrap());
+    let resp = warp::test::request()
+        .method("GET")
+        .path("/pkg/foo.js")
+        .reply(&filter)
+        .await;
+    assert_eq!(resp.status(), StatusCode::OK);
+}
