@@ -11,6 +11,7 @@ Install `wasm-pack` and run:
 
 ```bash
 cargo install wasm-pack
+# Enable Web Crypto support for both getrandom v0.2 and v0.3
 RUSTFLAGS="--cfg getrandom_backend=\"wasm_js\"" ./scripts/build.sh
 ```
 

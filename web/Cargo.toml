@@ -15,3 +15,6 @@ sugarloaf = "0.2.18"
 raw-window-handle = "0.6"
 wgpu = { version = "0.19", features = ["webgl"] }
 getrandom = { version = "0.3", features = ["wasm_js"] }
+# Enable the `js` backend for transitive users of getrandom v0.2
+getrandom02 = { package = "getrandom", version = "0.2", features = ["js"] }
+
