@@ -7,9 +7,11 @@ use portable_pty::{CommandBuilder, NativePtySystem, PtySize, PtySystem};
 
 pub fn routes(static_dir: &str) -> impl Filter<Extract = impl warp::Reply, Error = warp::Rejection> + Clone {
     let static_dir = static_dir.to_string();
-    let index = warp::path::end().and(warp::fs::file(format!("{}/index.html", static_dir)));
+    let index = warp::path::end()
+        .and(warp::fs::file(format!("{}/index.html", static_dir)));
+    let static_files = warp::fs::dir(static_dir.clone());
     let ws_route = warp::path("ws").and(warp::ws()).and_then(ws_handler);
-    index.or(ws_route)
+    index.or(static_files).or(ws_route)
 }
 
 async fn ws_handler(ws: warp::ws::Ws) -> Result<impl warp::Reply, Infallible> {
