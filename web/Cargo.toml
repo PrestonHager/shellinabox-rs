@@ -18,3 +18,6 @@ getrandom = { version = "0.3", features = ["wasm_js"] }
 # Enable the `js` backend for transitive users of getrandom v0.2
 getrandom02 = { package = "getrandom", version = "0.2", features = ["js"] }
 
+[patch.crates-io]
+librashader-pack = { path = "../vendor/librashader-pack" }
+
