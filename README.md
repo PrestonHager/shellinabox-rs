@@ -5,11 +5,13 @@ A minimal Rust reimplementation of Shell In A Box with a WebAssembly frontend.
 ## Building
 
 The frontend uses [wasm-pack](https://rustwasm.github.io/wasm-pack/) to compile
-`web/` into WebAssembly. Install `wasm-pack` and run the build script:
+`web/` into WebAssembly. Some dependencies require Web Crypto support at build
+time, so set the appropriate `RUSTFLAGS` when invoking the build script.
+Install `wasm-pack` and run:
 
 ```bash
 cargo install wasm-pack
-./scripts/build.sh
+RUSTFLAGS="--cfg getrandom_backend=\"wasm_js\"" ./scripts/build.sh
 ```
 
 This places the generated files under `static/pkg`, which the web server expects

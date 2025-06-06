@@ -14,3 +14,4 @@ console_error_panic_hook = "0.1"
 sugarloaf = "0.2.18"
 raw-window-handle = "0.6"
 wgpu = { version = "0.19", features = ["webgl"] }
+getrandom = { version = "0.3", features = ["wasm_js"] }

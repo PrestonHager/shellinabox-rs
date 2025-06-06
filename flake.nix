@@ -17,6 +17,11 @@
           version = "0.1.0";
           src = self;
           cargoLock.lockFile = ./Cargo.lock;
+          nativeBuildInputs = with pkgs; [ wasm-pack nodejs pkg-config openssl ];
+          preBuild = ''
+            export RUSTFLAGS="--cfg getrandom_backend=\"wasm_js\""
+            (cd web && wasm-pack build --release --target web --out-dir ../static/pkg)
+          '';
         };
 
         defaultPackage = self.packages.${system}.shellinabox-rs;
@@ -30,6 +35,9 @@
             pkgs.pkg-config
             pkgs.openssl
           ];
+          shellHook = ''
+            export RUSTFLAGS="--cfg getrandom_backend=\"wasm_js\""
+          '';
         };
       });
 }
