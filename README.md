@@ -12,7 +12,7 @@ Install `wasm-pack` and run:
 ```bash
 cargo install wasm-pack
 # Enable Web Crypto support for both getrandom v0.2 and v0.3
-RUSTFLAGS="--cfg getrandom_backend=\"wasm_js\"" ./scripts/build.sh
+RUSTFLAGS='--cfg getrandom_backend="wasm_js"' ./scripts/build.sh
 ```
 
 This places the generated files under `static/pkg`, which the web server expects
