@@ -1,8 +1,33 @@
 const ws = new WebSocket(`ws://${location.host}/ws`);
 const canvas = document.createElement('canvas');
+canvas.width = 800;
+canvas.height = 400;
 document.body.appendChild(canvas);
-// Sugarloaf expects a canvas to render the terminal
-// `Sugarloaf` should be provided by the compiled WASM package
+
+// Minimal canvas-based terminal renderer acting as a Sugarloaf stand-in
+class Sugarloaf {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.ctx.font = '16px monospace';
+    this.lineHeight = 18;
+    this.x = 0;
+    this.y = this.lineHeight;
+  }
+
+  write(text) {
+    for (const ch of text) {
+      if (ch === '\n') {
+        this.x = 0;
+        this.y += this.lineHeight;
+        continue;
+      }
+      this.ctx.fillText(ch, this.x, this.y);
+      this.x += this.ctx.measureText(ch).width;
+    }
+  }
+}
+
 const term = new Sugarloaf(canvas);
 
 ws.binaryType = 'arraybuffer';

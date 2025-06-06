@@ -8,9 +8,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
-web-sys = { version = "0.3", features = ["WebSocket", "Document", "Window", "HtmlElement", "MessageEvent", "console"] }
+web-sys = { version = "0.3", features = ["WebSocket", "Document", "Window", "HtmlElement", "console"] }
 js-sys = "0.3"
 console_error_panic_hook = "0.1"
-sugarloaf = "0.2"
-raw-window-handle = "0.6"
 
