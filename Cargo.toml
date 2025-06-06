@@ -3,4 +3,12 @@ name = "shellinabox"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "shellinabox-rs"
+path = "src/main.rs"
+
 [dependencies]
+warp = "0.3"
+tokio = { version = "1", features = ["full"] }
+portable-pty = "0.9"
+futures = "0.3"
