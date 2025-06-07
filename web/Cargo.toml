@@ -8,7 +8,16 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wasm-bindgen = "0.2"
-web-sys = { version = "0.3", features = ["WebSocket", "Document", "Window", "HtmlElement", "console"] }
+web-sys = { version = "0.3", features = ["WebSocket", "Document", "Window", "HtmlElement", "HtmlCanvasElement", "console"] }
 js-sys = "0.3"
 console_error_panic_hook = "0.1"
+sugarloaf = { version = "0.2.18", default-features = false }
+raw-window-handle = "0.6"
+wgpu = { version = "0.19", default-features = false, features = ["webgl", "wgsl"] }
+getrandom = { version = "0.3", features = ["wasm_js"] }
+# Enable the `js` backend for transitive users of getrandom v0.2
+getrandom02 = { package = "getrandom", version = "0.2", features = ["js"] }
+
+[patch.crates-io]
+librashader-pack = { path = "../vendor/librashader-pack" }
 

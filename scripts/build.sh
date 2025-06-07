@@ -4,6 +4,7 @@ set -euo pipefail
 # Build the WebAssembly frontend
 (
   cd web
+  export RUSTFLAGS="${RUSTFLAGS:-} --cfg getrandom_backend=\"wasm_js\""
   wasm-pack build --release --target web --out-dir ../static/pkg
 )
 
